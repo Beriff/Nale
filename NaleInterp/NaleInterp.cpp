@@ -9,7 +9,7 @@
 
 int main()
 {
-    std::ifstream t("C:\\Users\\Maxim\\Desktop\\nale_runtime\\test.nale");
+    std::ifstream t("C:\\Users\\Maxim\\Desktop\\nale_runtime\\nale.nale");
     std::stringstream buffer;
     buffer << t.rdbuf();
 

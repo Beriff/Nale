@@ -27,6 +27,7 @@ namespace NaleLexer {
 		// 0 none
 		// 1 number literal writing
 		// 2 string literal writing
+		// 3 comment
 		int execution_context = 0;
 
 		for (int i = 0; i < chrarr.size(); i++) {
@@ -89,6 +90,19 @@ namespace NaleLexer {
 						tokens.push_back(t);
 						if (i != chrarr.size()) {
 							i++;
+						}
+						continue;
+					}
+
+					if (chrarr[i] == '?' && chrarr[i + 1] == '?') {
+						execution_context = 3;
+						token_buffer.pop_back();
+						for (int k = i; k < chrarr.size(); k++) {
+							if (chrarr[k] == '\n') {
+								execution_context = 0;
+								i = k;
+								break;
+							}
 						}
 						continue;
 					}
