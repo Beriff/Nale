@@ -132,23 +132,26 @@ namespace NaleLexer {
 						}
 					}
 
-					if (token_buffer.length() == 1) {
-						if (token_buffer == "0"
-							|| token_buffer == "1"
-							|| token_buffer == "2"
-							|| token_buffer == "3"
-							|| token_buffer == "4"
-							|| token_buffer == "5"
-							|| token_buffer == "6"
-							|| token_buffer == "7"
-							|| token_buffer == "8"
-							|| token_buffer == "9") {
+					if (token_buffer.length() >= 1) {
+						if (token_buffer[0] == '0'
+							|| token_buffer[0] == '1'
+							|| token_buffer[0] == '2'
+							|| token_buffer[0] == '3'
+							|| token_buffer[0] == '4'
+							|| token_buffer[0] == '5'
+							|| token_buffer[0] == '6'
+							|| token_buffer[0] == '7'
+							|| token_buffer[0] == '8'
+							|| token_buffer[0] == '9') {
 							execution_context = 1;
 						}
 					}
 				}
 				else {
 					token t = token(tokentype::identifier, token_buffer);
+					if (execution_context == 1) {
+						t = token(tokentype::literal, token_buffer);
+					}
 					tokens.push_back(t);
 					token_buffer = "";
 				}
